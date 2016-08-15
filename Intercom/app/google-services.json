@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1020688541015",
+    "firebase_url": "https://intercom-40bb4.firebaseio.com",
+    "project_id": "intercom-40bb4",
+    "storage_bucket": "intercom-40bb4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1020688541015:android:cbc639edde09dee9",
+        "android_client_info": {
+          "package_name": "com.twiceyuan.intercom"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1020688541015-ij0rkrv5gjk2q06evpdo0hlu7r0ersgo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.twiceyuan.intercom",
+            "certificate_hash": "9B1E2FD0BB99519F19F87933DBA623F4DB276AA2"
+          }
+        },
+        {
+          "client_id": "1020688541015-r8kslruockn0vkljvdrh1q1ku02trb7e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBDzylaOxvjDAQYerIQrj-3cJVzCl6S2oE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1020688541015-r8kslruockn0vkljvdrh1q1ku02trb7e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

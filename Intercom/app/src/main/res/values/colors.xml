@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#e6e6e6</color>
+    <color name="colorPrimaryDark">#cccccc</color>
+
+    <color name="colorAccent">#41a397</color>
+    <color name="colorAccentDisable">#5541a397</color>
+    <color name="colorAccentPressed">#2d6e66</color>
+
+    <color name="white">#ffffff</color>
+
+    <color name="intercom_text_normal">#38393d</color>
+    <color name="intercom_text_light">#9f9f9f</color>
+    <color name="bg_default_image">#dcdcdc</color>
+    <color name="mask_white_66">#A8FFFFFF</color>
+    <color name="bg_chat_normal">#f1f1f1</color>
+</resources>

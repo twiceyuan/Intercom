@@ -1,0 +1,104 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="ToolbarColoredBackArrow" parent="AppTheme">
+        <item name="android:textColorSecondary">@color/intercom_text_normal</item>
+    </style>
+
+    <style name="BelowHeaderContainer">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginTop">?actionBarSize</item>
+    </style>
+
+    <style name="LoginDialogStyle" parent="Theme.AppCompat.Light.Dialog">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+    </style>
+
+    <style name="ChatMessageLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:padding">4dp</item>
+        <item name="android:visibility">gone</item>
+    </style>
+
+    <style name="ChatAvatar">
+        <item name="android:layout_width">36dp</item>
+        <item name="android:layout_height">36dp</item>
+        <item name="android:padding">1dp</item>
+    </style>
+
+    <style name="ChatAvatar.Right">
+        <item name="android:layout_marginLeft">6dp</item>
+        <item name="android:layout_marginRight">12dp</item>
+    </style>
+
+    <style name="ChatAvatar.Left">
+        <item name="android:layout_marginLeft">12dp</item>
+        <item name="android:layout_marginRight">6dp</item>
+    </style>
+
+    <style name="ChatTextField">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="ChatTextField.Right">
+        <item name="android:gravity">right|center_vertical</item>
+    </style>
+
+    <style name="ChatTextField.Left">
+        <item name="android:gravity">left|center_vertical</item>
+    </style>
+
+    <style name="ChatTextBackground">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="ChatTextBackground.Right">
+        <item name="android:background">@drawable/bg_chat_right</item>
+    </style>
+
+    <style name="ChatTextBackground.Left">
+        <item name="android:background">@drawable/bg_chat_left</item>
+    </style>
+
+    <style name="ChatText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">@color/intercom_text_normal</item>
+        <item name="android:textSize">@dimen/chat_message_text_size</item>
+    </style>
+
+    <style name="ChatTextFooter">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">6dp</item>
+        <item name="android:textColor">@color/intercom_text_light</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:visibility">gone</item>
+    </style>
+
+    <style name="ChatTextFooter.Right">
+        <item name="android:gravity">right</item>
+    </style>
+
+    <style name="ChatTextFooter.Left">
+        <item name="android:gravity">left</item>
+    </style>
+
+</resources>

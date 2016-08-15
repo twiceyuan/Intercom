@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:ignore="RtlHardcoded,UselessParent">
+
+    <TextView
+        android:id="@+id/messageCreateAt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_message_tip"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:paddingBottom="4dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:paddingTop="4dp"
+        android:textColor="@color/white"
+        android:textSize="10sp"
+        android:visibility="gone"
+        tools:visibility="visible"
+        tools:ignore="SmallSp"
+        tools:text="今天 12:32"/>
+
+    <LinearLayout
+        android:id="@+id/messageLayout"
+        style="@style/ChatMessageLayout"
+        tools:visibility="visible">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/messengerImageView"
+            style="@style/ChatAvatar.Left"
+            android:src="@color/intercom_text_light"/>
+
+        <LinearLayout
+            style="@style/ChatTextField.Left">
+
+            <LinearLayout
+                style="@style/ChatTextBackground.Left">
+
+                <TextView
+                    android:id="@+id/messageTextView"
+                    style="@style/ChatText"
+                    tools:text="@string/test_string_long"/>
+
+                <TextView
+                    android:id="@+id/messengerTextView"
+                    style="@style/ChatTextFooter.Left"
+                    tools:text="twiceYuan"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="12dp"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/messageLayoutSelf"
+        style="@style/ChatMessageLayout"
+        tools:visibility="visible">
+
+        <Space
+            android:layout_width="12dp"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            style="@style/ChatTextField.Right">
+
+            <LinearLayout style="@style/ChatTextBackground.Right">
+
+                <TextView
+                    android:id="@+id/messageTextViewSelf"
+                    style="@style/ChatText"
+                    tools:text="@string/test_string_short"/>
+
+                <TextView
+                    android:id="@+id/messengerTextViewSelf"
+                    style="@style/ChatTextFooter.Right"
+                    tools:text="twiceYuan · 12:21:21"
+                    tools:visibility="visible"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/messengerImageViewSelf"
+            style="@style/ChatAvatar.Right"
+            android:src="@color/bg_default_image"/>
+
+    </LinearLayout>
+
+</LinearLayout>

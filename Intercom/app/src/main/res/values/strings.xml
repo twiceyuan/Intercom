@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">Intercom</string>
+    <string name="login">登录</string>
+    <string name="register">注册</string>
+
+    <string name="submit">提交</string>
+    <string name="google_login">Login by Google</string>
+    <string name="email_login">Login by Email</string>
+
+    <string name="user_logon">用户%s已登录</string>
+    <string name="login_failed">登录失败</string>
+    <string name="login_failed_arg">登录失败：%s</string>
+    <string name="auth_failed">授权失败</string>
+    <string name="google_connect_failed">连接失败，请检查网络</string>
+    <string name="send">发送</string>
+    <string name="please_input_text">请输入…</string>
+    <string name="input_nickname">请输入昵称</string>
+    <string name="input_photo_url">请输入 Gravatar™ 头像 Email 地址</string>
+    <string name="submit_success">提交成功</string>
+    <string name="logout">退出账号</string>
+    <string name="modify_profile">修改资料</string>
+    <string name="no_data">没有数据</string>
+    <string name="email_prompt">你的邮箱（不可修改）</string>
+    <string name="input_global_id">请输入你的用户标识</string>
+    <string name="global_id_tip_title">全局用户 ID</string>
+    <string name="global_id_tip">默认情况下，用户 ID 是 Firebase 生成的一段类似乱码的字符串，不容易用来记忆和交流，你可以设置自己的用户 ID 来作为你用户 ID 的链接，它和昵称无关，只有在搜索你的时候才会用到</string>
+    <string name="title_conversation_list">对话列表</string>
+    <string name="add_conversation">添加会话</string>
+
+    <string name="gr_avatar_base_url">https://www.gravatar.com/avatar/%s</string>
+    <string name="gr_avatar_base_url_200px">https://www.gravatar.com/avatar/%s?s=200</string>
+    <string name="test_gravatar">点击测试 Gravtar™ 头像设置</string>
+    <string name="test_string_long">这里是一个示例聊天内容。示例聊天内容中，包括两种字符串长度，一个是本例中的长的，一种是短的。长的一般在三到五行左右，用来测试大段文字能否正常显示，短的则只有一行不到的内容。</string>
+    <string name="test_string_short">我是短的测试文字</string>
+
+</resources>

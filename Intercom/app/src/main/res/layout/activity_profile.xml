@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+    <include layout="@layout/include_common_toolbar"/>
+
+    <RelativeLayout style="@style/BelowHeaderContainer">
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/et_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/normal_edit_text_margin"
+            android:layout_marginRight="@dimen/normal_edit_text_margin"
+            android:layout_marginTop="@dimen/normal_edit_text_margin"
+            android:hint="@string/input_nickname"
+            app:met_floatingLabel="normal"
+            app:met_maxCharacters="20"
+            app:met_minCharacters="1"/>
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/et_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/et_username"
+            android:layout_marginLeft="@dimen/normal_edit_text_margin"
+            android:layout_marginRight="@dimen/normal_edit_text_margin"
+            android:layout_marginTop="@dimen/normal_edit_text_margin"
+            android:enabled="false"
+            android:hint="@string/email_prompt"
+            app:met_floatingLabel="normal"/>
+
+        <RelativeLayout
+            android:id="@+id/rl_global_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/et_email"
+            android:layout_marginTop="@dimen/normal_edit_text_margin">
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/et_user_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/normal_edit_text_margin"
+                android:layout_marginRight="@dimen/normal_edit_text_margin"
+                android:hint="@string/input_global_id"
+                android:maxLines="1"
+                app:met_floatingLabel="normal"
+                app:met_maxCharacters="20"/>
+
+            <ImageView
+                android:id="@+id/img_question"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/normal_edit_text_margin"
+                android:layout_marginRight="@dimen/normal_edit_text_margin"
+                android:layout_marginTop="@dimen/normal_edit_text_margin"
+                android:contentDescription="@string/app_name"
+                android:padding="8dp"
+                android:src="@drawable/ic_help_black_24dp"
+                android:tint="@color/intercom_text_light"/>
+
+        </RelativeLayout>
+
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/et_photoUrl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rl_global_id"
+            android:layout_marginLeft="@dimen/normal_edit_text_margin"
+            android:layout_marginRight="@dimen/normal_edit_text_margin"
+            android:layout_marginTop="@dimen/normal_edit_text_margin"
+            android:maxLines="1"
+            android:hint="@string/input_photo_url"
+            app:met_floatingLabel="normal"/>
+
+        <FrameLayout
+            android:id="@+id/imageAvatarFrame"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_below="@id/et_photoUrl"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="12dp">
+
+            <ImageView
+                android:id="@+id/imageAvatar"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:padding="1dp"
+                android:background="@color/bg_default_image"
+                android:contentDescription="@string/app_name"/>
+
+            <ProgressBar
+                android:id="@+id/imageAvatarProgress"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="invisible"/>
+
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/btn_testAvatar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/imageAvatarFrame"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@id/imageAvatarFrame"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_toEndOf="@id/imageAvatarFrame"
+            android:layout_toRightOf="@id/imageAvatarFrame"
+            android:gravity="center"
+            android:text="@string/test_gravatar"
+            android:textColor="@color/intercom_text_light"/>
+
+        <include layout="@layout/include_progress_bar"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>
