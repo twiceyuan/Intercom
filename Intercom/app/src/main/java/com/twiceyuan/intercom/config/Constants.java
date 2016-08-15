@@ -1,5 +1,7 @@
 package com.twiceyuan.intercom.config;
 
+import com.twiceyuan.intercom.common.RequestCode;
+
 /**
  * Created by twiceYuan on 8/2/16.
  * Email: i@twiceyuan.com
@@ -18,6 +20,6 @@ public interface Constants {
 
     int DEFAULT_MSG_LENGTH_LIMIT = 100;
 
-    int RC_SIGN_IN          = 1000;
-    int REQUEST_EMAIL_LOGIN = 1001;
+    int RC_SIGN_IN          = RequestCode.get();
+    int REQUEST_EMAIL_LOGIN = RequestCode.get();
 }
