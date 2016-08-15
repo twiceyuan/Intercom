@@ -8,6 +8,33 @@
 
 本项目是一个个人模板项目，主要用于整理作者在 Android 开发过程中用到的一些常见的配置，暂时没有实际的需求，希望也可以对有相同目的的朋友提供一个参考，欢迎提出改进的建议。
 
+## 结构
+
+root
+```
+./
+├── Intercom - Android 项目文件
+└── art      - 设计相关素材
+```
+
+java source
+```
+./
+├── App.java   - Application 文件
+├── common     - 通用的帮助、工具类
+├── config     - 配置
+├── injector   - dagger 注入相关
+├── model      - 模型类
+│   ├── local  - 本地逻辑相关
+│   └── remote - 服务端逻辑相关
+├── service    - 服务
+└── ui         - 界面
+    ├── base   - 基础 Activity、Fragment 等
+    ├── common - 通用界面元素
+    ├── view   - 具体实现
+    └── widget - 通用控件
+```
+
 ## License
 
 ```
