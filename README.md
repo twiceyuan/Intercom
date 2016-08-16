@@ -10,6 +10,32 @@
 
 ## 结构
 
+Firebase Realtime Database 结构
+```
+.
+├── 个人资料（profile）
+│   └── 用户ID
+│       ├── Email（email）
+│       ├── 头像地址（photoUrl）
+│       ├── 昵称（username）
+│       └── 自定义ID（global_id）
+├── 对话信息（conversation）
+│   └── 用户ID
+│       └── 对方用户ID
+│           ├── 对话ID（id）
+│           ├── 最后消息内容（lastMessage）
+│           └── 最后消息时间（lastAt）
+├── 对话消息（message）
+│   └── 对话ID
+│       └── 消息ID
+│           ├── 发送用户（from）
+│           ├── 消息内容（content）
+│           └── 消息时间（createAt）
+└── 自定义ID（global_id）
+    └── 自定义ID
+        └── 用户ID
+```
+
 root
 ```
 ./
