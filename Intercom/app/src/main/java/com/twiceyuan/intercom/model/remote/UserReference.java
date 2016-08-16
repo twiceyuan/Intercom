@@ -6,7 +6,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.twiceyuan.intercom.common.FirebaseUtil;
-import com.twiceyuan.intercom.config.Constants;
 import com.twiceyuan.intercom.config.Nodes;
 import com.twiceyuan.intercom.model.local.Message;
 import com.twiceyuan.intercom.model.local.User;
@@ -25,11 +24,8 @@ import rx.Observable;
  */
 public class UserReference {
 
-    @Inject
-    FirebaseUser mUser;
-
-    @Inject
-    DatabaseReference mReference;
+    @Inject FirebaseUser      mUser;
+    @Inject DatabaseReference mReference;
 
     private DatabaseReference mUserConversationsRef;    // 用户对话列表引用
     private DatabaseReference mMessageConversationsRef; // 消息对话实体列表引用
