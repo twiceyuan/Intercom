@@ -29,6 +29,7 @@ import com.twiceyuan.intercom.common.FirebaseUtil;
 import com.twiceyuan.intercom.common.TimeUtil;
 import com.twiceyuan.intercom.common.ViewUtil;
 import com.twiceyuan.intercom.config.Constants;
+import com.twiceyuan.intercom.config.Nodes;
 import com.twiceyuan.intercom.injector.components.UserActivityComponent;
 import com.twiceyuan.intercom.model.local.Message;
 import com.twiceyuan.intercom.model.local.User;
@@ -116,7 +117,7 @@ public class ChatActivity extends BaseUserActivity implements CanBack {
             return;
         } else {
             mSelfUid = firebaseUser.getUid();
-            mConversationRef = mFirebaseDatabaseReference.child(Constants.DB_MESSAGE).child(mConversationId);
+            mConversationRef = mFirebaseDatabaseReference.child(Nodes.MESSAGE).child(mConversationId);
         }
 
         initViews();

@@ -11,6 +11,7 @@ import android.text.TextUtils;
 import android.view.Window;
 
 import com.twiceyuan.intercom.R;
+import com.twiceyuan.intercom.common.RequestCode;
 import com.twiceyuan.intercom.common.Toaster;
 import com.twiceyuan.intercom.config.Constants;
 import com.twiceyuan.intercom.ui.base.BaseActivity;
@@ -25,6 +26,8 @@ import com.twiceyuan.intercom.ui.common.TabPagerAdapter;
  */
 public class EmailLoginActivity extends BaseActivity {
 
+    public static final int REQUEST_EMAIL_LOGIN = RequestCode.get();
+
     private static final String EXTRA_EMAIL    = "email";
     private static final String EXTRA_PASSWORD = "password";
     private static final String EXTRA_TYPE     = "type";
@@ -37,7 +40,7 @@ public class EmailLoginActivity extends BaseActivity {
 
     public static void start(Activity context) {
         Intent starter = new Intent(context, EmailLoginActivity.class);
-        context.startActivityForResult(starter, Constants.REQUEST_EMAIL_LOGIN);
+        context.startActivityForResult(starter, EmailLoginActivity.REQUEST_EMAIL_LOGIN);
     }
 
     @Override

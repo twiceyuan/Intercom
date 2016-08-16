@@ -20,8 +20,9 @@ import com.twiceyuan.intercom.App;
 import com.twiceyuan.intercom.R;
 import com.twiceyuan.intercom.common.FirebaseUtil;
 import com.twiceyuan.intercom.common.Logger;
+import com.twiceyuan.intercom.common.RequestCode;
 import com.twiceyuan.intercom.common.Toaster;
-import com.twiceyuan.intercom.config.Constants;
+import com.twiceyuan.intercom.config.Nodes;
 import com.twiceyuan.intercom.injector.components.ActivityComponent;
 import com.twiceyuan.intercom.model.local.User;
 import com.twiceyuan.intercom.ui.base.BaseActivity;
@@ -40,10 +41,13 @@ import javax.inject.Inject;
  */
 public class WelcomeActivity extends BaseActivity implements GoogleApiClient.OnConnectionFailedListener {
 
-    @Inject FirebaseAuth      mAuth;
-    @Inject GoogleApiClient   mGoogleApiClient;
-    @Inject DatabaseReference mDatabaseReference;
-
+    private static final int RC_SIGN_IN = RequestCode.get();
+    @Inject
+    FirebaseAuth mAuth;
+    @Inject
+    GoogleApiClient mGoogleApiClient;
+    @Inject
+    DatabaseReference mDatabaseReference;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
     @Override
@@ -54,7 +58,7 @@ public class WelcomeActivity extends BaseActivity implements GoogleApiClient.OnC
         mAuthListener = firebaseAuth -> {
             FirebaseUser user = firebaseAuth.getCurrentUser();
             if (user != null) {
-                DatabaseReference remoteUser = mDatabaseReference.child(Constants.DB_PROFILE).child(user.getUid());
+                DatabaseReference remoteUser = mDatabaseReference.child(Nodes.PROFILE).child(user.getUid());
                 FirebaseUtil.readSnapshot(remoteUser, User.class).subscribe(userSnapshot -> {
                     if (userSnapshot == null) {
                         remoteUser.setValue(new User.Builder().from(user).build());
@@ -91,7 +95,7 @@ public class WelcomeActivity extends BaseActivity implements GoogleApiClient.OnC
 
     public void loginByGoogle(View view) {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
-        startActivityForResult(signInIntent, Constants.RC_SIGN_IN);
+        startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
     @Override
@@ -99,7 +103,7 @@ public class WelcomeActivity extends BaseActivity implements GoogleApiClient.OnC
         super.onActivityResult(requestCode, resultCode, data);
 
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-        if (requestCode == Constants.RC_SIGN_IN) {
+        if (requestCode == RC_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             if (result.isSuccess()) {
                 // Google Sign In was successful, authenticate with Firebase
@@ -110,7 +114,7 @@ public class WelcomeActivity extends BaseActivity implements GoogleApiClient.OnC
             }
         }
 
-        if (requestCode == Constants.REQUEST_EMAIL_LOGIN) {
+        if (requestCode == EmailLoginActivity.REQUEST_EMAIL_LOGIN) {
             EmailLoginActivity.handleResult(resultCode, data,
                     (email, password) -> mAuth.signInWithEmailAndPassword(email, password),
                     (email, password) -> mAuth.createUserWithEmailAndPassword(email, password)

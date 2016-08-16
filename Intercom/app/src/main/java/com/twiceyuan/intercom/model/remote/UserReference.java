@@ -7,6 +7,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.twiceyuan.intercom.common.FirebaseUtil;
 import com.twiceyuan.intercom.config.Constants;
+import com.twiceyuan.intercom.config.Nodes;
 import com.twiceyuan.intercom.model.local.Message;
 import com.twiceyuan.intercom.model.local.User;
 import com.twiceyuan.intercom.model.local.UserConversation;
@@ -43,13 +44,13 @@ public class UserReference {
      * 获得个人的对话列表
      */
     public DatabaseReference getUserConversations(String userId) {
-        return mReference.child(Constants.DB_CONVERSATIONS).child(userId);
+        return mReference.child(Nodes.CONVERSATIONS).child(userId);
     }
 
     public DatabaseReference getUserConversations() {
         if (mUserConversationsRef == null) {
             mUserConversationsRef = mReference
-                    .child(Constants.DB_CONVERSATIONS)
+                    .child(Nodes.CONVERSATIONS)
                     .child(mUser.getUid());
         }
         return mUserConversationsRef;
@@ -82,7 +83,7 @@ public class UserReference {
      */
     public DatabaseReference getMessageConversations() {
         if (mMessageConversationsRef == null) {
-            mMessageConversationsRef = mReference.child(Constants.DB_MESSAGE);
+            mMessageConversationsRef = mReference.child(Nodes.MESSAGE);
         }
         return mMessageConversationsRef;
     }
@@ -147,11 +148,11 @@ public class UserReference {
      * @param peerUid 对方的用户 ID
      */
     private void insertToPeer(String peerUid, UserConversation conversation) {
-        mReference.child(Constants.DB_CONVERSATIONS).child(peerUid).child(mUser.getUid()).setValue(conversation);
+        mReference.child(Nodes.CONVERSATIONS).child(peerUid).child(mUser.getUid()).setValue(conversation);
     }
 
     public DatabaseReference getUserRef(String peerId) {
-        return mReference.child(Constants.DB_PROFILE).child(peerId);
+        return mReference.child(Nodes.PROFILE).child(peerId);
     }
 
     public Observable<User> getUser(String peerId) {
@@ -159,6 +160,6 @@ public class UserReference {
     }
 
     public DatabaseReference getGlobalIdRef() {
-        return mReference.child(Constants.DB_USER_GLOBAL_ID);
+        return mReference.child(Nodes.USER_GLOBAL_ID);
     }
 }
