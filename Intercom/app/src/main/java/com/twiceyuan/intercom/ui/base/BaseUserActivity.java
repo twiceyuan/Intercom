@@ -16,7 +16,7 @@ import com.twiceyuan.intercom.ui.view.WelcomeActivity;
 public class BaseUserActivity extends BaseActivity {
 
     @Override
-    public void onInject(ActivityComponent component) {
+    public final void onInject(ActivityComponent component) {
         if (component instanceof UserActivityComponent) {
             onInject((UserActivityComponent) component);
         } else {
