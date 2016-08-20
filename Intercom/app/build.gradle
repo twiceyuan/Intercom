@@ -137,5 +137,7 @@ dependencies {
     compile("com.github.twiceyuan:CommonAdapter:${rootProject.ext.commonAdapterVersion}") {
         exclude group: 'com.android.support', module: 'recyclerview-v7'
     }
+
+    compile 'com.github.twiceyuan:AndroidLog:1.0.1'
 }
 

@@ -65,9 +65,9 @@ public class UserReference {
         DatabaseReference conversationRef = getUserConversations(selfId).child(peerUid);
         return FirebaseUtil.readSnapshot(conversationRef, UserConversation.class).flatMap(conversation -> {
             if (conversation == null) {
-                UserConversation newConversation = createConversation();
-                insertToPeer(peerUid, newConversation);
-                return FirebaseUtil.setValue(conversationRef, newConversation, UserConversation.class);
+                UserConversation conversationNew = createConversation();
+                insertToPeer(peerUid, conversationNew);
+                return FirebaseUtil.setValue(conversationRef, conversationNew);
             } else {
                 return Observable.just(conversation);
             }

@@ -1,9 +1,9 @@
 package com.twiceyuan.intercom.common;
 
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.twiceyuan.intercom.App;
+import com.twiceyuan.log.L;
 
 /**
  * Created by twiceYuan on 8/3/16.
@@ -42,16 +42,15 @@ public class Toaster {
 
     public static void e(Throwable throwable) {
         if (throwable != null) {
-            Log.e("Toast", throwable.getMessage(), throwable);
+            L.e(throwable);
             if (TextUtils.isEmpty(throwable.getMessage())) {
                 s("发生了错误");
             } else {
                 String message = (throwable.getMessage());
                 s(message);
-                Log.e("Error", throwable.getMessage(), throwable);
             }
         } else {
-            s("发生了错误");
+            s("发生了错误，但没有错误信息");
         }
     }
 }

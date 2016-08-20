@@ -85,16 +85,16 @@ public class FirebaseUtil {
         return (TextUtils.isEmpty(s) || s.equals("null"));
     }
 
-    public static <T> Observable<T> setValue(DatabaseReference ref, T t, Class<T> clazz) {
-        return Observable.<Observable<T>>create(subscriber -> {
+    public static <T> Observable<T> setValue(DatabaseReference ref, T t) {
+        return Observable.create(subscriber -> {
             ref.setValue(t, (databaseError, databaseReference) -> {
                 if (databaseError != null) {
                     subscriber.onError(databaseError.toException());
                 } else {
-                    subscriber.onNext(readSnapshot(databaseReference, clazz));
+                    subscriber.onNext(t);
                     subscriber.onCompleted();
                 }
             });
-        }).flatMap(RxUtil::unpack);
+        });
     }
 }

@@ -14,8 +14,9 @@ import rx.Observable;
 public class ViewUtil {
 
     public static Observable<String> observeText(EditText editText) {
-        return Observable.create(subscriber -> {
-            editText.addTextChangedListener(new TextWatcher() {
+        TextWatcher textWatcher[] = new TextWatcher[1];
+        Observable<String> textObservable = Observable.create(subscriber -> {
+            editText.addTextChangedListener(textWatcher[0] = new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 }
@@ -30,5 +31,11 @@ public class ViewUtil {
                 }
             });
         });
+        textObservable.doOnUnsubscribe(() -> {
+            if (textWatcher[0] != null) {
+                editText.removeTextChangedListener(textWatcher[0]);
+            }
+        });
+        return textObservable;
     }
 }
