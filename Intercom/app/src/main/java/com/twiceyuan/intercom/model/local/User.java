@@ -12,14 +12,16 @@ import com.twiceyuan.intercom.common.Check;
  */
 public class User {
 
-    public static final String USERNAME  = "username";
-    public static final String EMAIL     = "email";
-    public static final String PHOTO_URL = "photoUrl";
-    public static final String GLOBAL_ID = "globalId";
+    public static final String USERNAME    = "username";
+    public static final String EMAIL       = "email";
+    public static final String PHOTO_URL   = "photoUrl";
+    public static final String PHOTO_EMAIL = "photoEmail";
+    public static final String GLOBAL_ID   = "globalId";
 
     public String username;
     public String email;
     public String photoUrl;
+    public String photoEmail;
     public String globalId;
 
     public static class Builder {

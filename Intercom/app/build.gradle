@@ -13,7 +13,7 @@ def releaseTime() {
 }
 
 android {
-    compileSdkVersion 23
+    compileSdkVersion 24
     buildToolsVersion "24.0.1"
 
     // apk输出重命名
@@ -48,7 +48,7 @@ android {
     defaultConfig {
         applicationId "com.twiceyuan.intercom"
         minSdkVersion 16
-        targetSdkVersion 23
+        targetSdkVersion 24
         versionCode 1
         versionName "0.1.0-alpha"
     }
@@ -139,5 +139,17 @@ dependencies {
     }
 
     compile 'com.github.twiceyuan:AndroidLog:1.0.1'
+
+    // JSON -> Model
+    compile 'com.google.code.gson:gson:2.5'
+    // 网络请求相关
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.4.1'
+
+    // 图片选择
+    compile 'com.github.jkwiecien:EasyImage:1.2.4'
+    compile 'com.theartofdev.edmodo:android-image-cropper:2.3.1'
 }
 

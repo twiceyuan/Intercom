@@ -1,24 +1,13 @@
 package com.twiceyuan.intercom.ui.view.social;
 
-import android.app.Activity;
-import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.SimpleTarget;
-import com.bumptech.glide.signature.StringSignature;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
-import com.twiceyuan.intercom.App;
-import com.twiceyuan.intercom.R;
 import com.twiceyuan.intercom.common.CommonUtil;
-import com.twiceyuan.intercom.common.Encrypt;
 import com.twiceyuan.intercom.common.FirebaseUtil;
 import com.twiceyuan.intercom.common.Logger;
 import com.twiceyuan.intercom.model.local.User;
@@ -41,11 +30,6 @@ public class ProfileContract {
 
     interface View extends BaseView {
         void onProfileUpdate(User user);
-
-        void onFetchGravatar();
-
-        void onFetchGravatarSuccess(Drawable avatar, String url);
-
         void onSubmitProfileSuccess();
     }
 
@@ -63,7 +47,7 @@ public class ProfileContract {
             mProfileRef = mUserReference.getUserRef(mFirebaseUser.getUid());
         }
 
-        void startObserveProfile() {
+        void fetchProfile() {
             runRx(FirebaseUtil.readSnapshot(mUserReference.getUserRef(mFirebaseUser.getUid()), User.class), (user) -> {
                 mUser = user;
                 getImplView().onProfileUpdate(user);
@@ -72,17 +56,8 @@ public class ProfileContract {
 
         /**
          * 提交修改
-         *
-         * @param username 修改后的用户名
-         * @param photoUrl 修改后的头像地址
-         * @param globalId 修改后的 id
          */
-        void submit(String username, String photoUrl, String globalId) {
-
-            mUser.username = username;
-            mUser.photoUrl = photoUrl;
-            mUser.globalId = globalId;
-
+        void submit() {
             runRx(updateGlobalId(mUser.globalId), aVoid -> {
                 mProfileRef.setValue(mUser);
                 getImplView().onSubmitProfileSuccess();
@@ -143,18 +118,8 @@ public class ProfileContract {
             });
         }
 
-        public void fetchGravatarEmail(String email) {
-            getImplView().onFetchGravatar();
-            String url = App.get().getString(R.string.gr_avatar_base_url_200px, Encrypt.md5(email));
-            Glide.with((Activity) getImplView()).load(url)
-                    .diskCacheStrategy(DiskCacheStrategy.NONE)
-                    .signature(new StringSignature(String.valueOf(System.currentTimeMillis() / 60 * 1000)))
-                    .into(new SimpleTarget<GlideDrawable>() {
-                        @Override
-                        public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> glideAnimation) {
-                            getImplView().onFetchGravatarSuccess(resource, url);
-                        }
-                    });
+        public User getUser() {
+            return mUser;
         }
     }
 }

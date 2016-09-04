@@ -9,6 +9,7 @@ import com.twiceyuan.intercom.App;
 import com.twiceyuan.intercom.injector.AppContext;
 import com.twiceyuan.intercom.injector.UserScope;
 import com.twiceyuan.intercom.injector.modules.UserModule;
+import com.twiceyuan.intercom.service.ImageHostService;
 
 import dagger.Component;
 
@@ -26,6 +27,8 @@ public interface UserComponent {
     Context context();
 
     App application();
+
+    ImageHostService imageHostService();
 
     FirebaseAuth auth();
 

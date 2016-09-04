@@ -1,5 +1,6 @@
 package com.twiceyuan.intercom.ui.base;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -26,10 +27,13 @@ import com.twiceyuan.intercom.injector.components.DaggerUserActivityComponent;
 import com.twiceyuan.intercom.injector.components.UserComponent;
 import com.twiceyuan.intercom.injector.modules.ActivityModule;
 import com.twiceyuan.intercom.injector.modules.GoogleClientModule;
+import com.twiceyuan.log.L;
 
 import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
 import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 
 /**
@@ -115,6 +119,16 @@ public class BaseActivity extends AppCompatActivity {
         mSubscriptions.add(observable.subscribe(subscriber, this::onThrow));
     }
 
+    public <T> void runApi(Observable<T> observable, Action1<T> subscriber, Action1<Throwable> errorHandler) {
+        runRx(observable.observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.newThread()), subscriber, errorHandler);
+    }
+
+    public <T> void runApi(Observable<T> observable, Action1<T> subscriber) {
+        runRx(observable.observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.newThread()), subscriber, this::onThrow);
+    }
+
     public void onThrow(Throwable throwable) {
         Toaster.s(throwable.getMessage());
     }
@@ -129,7 +143,7 @@ public class BaseActivity extends AppCompatActivity {
             UserComponent userComponent = App.get().getUserComponent();
             if (userComponent != null) {
                 mActivityComponent = DaggerUserActivityComponent.builder()
-                        .userComponent(App.get().getUserComponent())
+                        .userComponent(userComponent)
                         .activityModule(new ActivityModule(this))
                         .googleClientModule(new GoogleClientModule(this))
                         .build();
@@ -140,7 +154,6 @@ public class BaseActivity extends AppCompatActivity {
                         .googleClientModule(new GoogleClientModule(this))
                         .build();
             }
-
         }
         return mActivityComponent;
     }
@@ -156,5 +169,13 @@ public class BaseActivity extends AppCompatActivity {
                 callback.call(resource);
             }
         });
+    }
+
+    public void requestCodeNotFound() {
+        L.i("no match request code.");
+    }
+
+    public Activity getContext() {
+        return this;
     }
 }

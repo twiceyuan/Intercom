@@ -7,6 +7,7 @@ import com.twiceyuan.intercom.injector.components.AppComponent;
 import com.twiceyuan.intercom.injector.components.DaggerAppComponent;
 import com.twiceyuan.intercom.injector.components.DaggerUserComponent;
 import com.twiceyuan.intercom.injector.components.UserComponent;
+import com.twiceyuan.intercom.injector.modules.ApiModule;
 import com.twiceyuan.intercom.injector.modules.AppModule;
 import com.twiceyuan.intercom.injector.modules.UserModule;
 
@@ -35,6 +36,7 @@ public class App extends Application {
     public AppComponent getAppComponent() {
         if (mAppComponent == null) {
             mAppComponent = DaggerAppComponent.builder()
+                    .apiModule(new ApiModule())
                     .appModule(new AppModule(this))
                     .build();
         }

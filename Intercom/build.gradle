@@ -23,7 +23,7 @@ allprojects {
 
 ext {
     butterKnifeVersion = "8.2.1"
-    androidSupportVersion = "23.+"
+    androidSupportVersion = "24.+"
     firebaseVersion = "9.0.0"
     commonAdapterVersion = "0.5.2"
     daggerVersion = "2.0"
