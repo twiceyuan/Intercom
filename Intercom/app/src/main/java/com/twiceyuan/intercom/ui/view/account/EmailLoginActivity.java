@@ -26,7 +26,7 @@ import com.twiceyuan.intercom.ui.common.TabPagerAdapter;
  */
 public class EmailLoginActivity extends BaseActivity {
 
-    public static final int REQUEST_EMAIL_LOGIN = RequestCode.get();
+    public static final int REQUEST_EMAIL_LOGIN = RequestCode.INSTANCE.get();
 
     private static final String EXTRA_EMAIL    = "email";
     private static final String EXTRA_PASSWORD = "password";
@@ -112,14 +112,14 @@ public class EmailLoginActivity extends BaseActivity {
                                     @NonNull InputAccountFragment.InfoCallback loginCallback,
                                     @NonNull InputAccountFragment.InfoCallback registerCallback) {
         if (resultCode != RESULT_OK) {
-            Toaster.s("操作取消");
+            Toaster.INSTANCE.s("操作取消");
             return;
         }
         String email = data.getStringExtra(EXTRA_EMAIL);
         String password = data.getStringExtra(EXTRA_PASSWORD);
         int type = data.getIntExtra(EXTRA_TYPE, -1);
         if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
-            Toaster.s("信息不完整");
+            Toaster.INSTANCE.s("信息不完整");
             return;
         }
         switch (type) {
@@ -130,7 +130,7 @@ public class EmailLoginActivity extends BaseActivity {
                 registerCallback.call(email, password);
                 break;
             default:
-                Toaster.s("信息不合法");
+                Toaster.INSTANCE.s("信息不合法");
         }
     }
 }

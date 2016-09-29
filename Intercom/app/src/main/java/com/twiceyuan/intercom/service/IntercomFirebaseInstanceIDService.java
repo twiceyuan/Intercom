@@ -3,7 +3,7 @@ package com.twiceyuan.intercom.service;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
 import com.google.firebase.messaging.FirebaseMessaging;
-import com.twiceyuan.intercom.common.Logger;
+import com.twiceyuan.log.L;
 
 /**
  * Created by twiceYuan on 8/3/16.
@@ -22,7 +22,7 @@ public class IntercomFirebaseInstanceIDService extends FirebaseInstanceIdService
         // If you need to handle the generation of a token, initially or after a refresh this is
         // where you should do that.
         String token = FirebaseInstanceId.getInstance().getToken();
-        Logger.d("FCM Token: " + token);
+        L.i("FCM Token: " + token);
 
         // Once a token is generated, we subscribe to topic.
         FirebaseMessaging.getInstance().subscribeToTopic(FRIENDLY_ENGAGE_TOPIC);

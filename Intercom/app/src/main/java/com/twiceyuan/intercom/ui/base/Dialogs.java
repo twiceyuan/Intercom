@@ -62,7 +62,7 @@ public class Dialogs {
         EditText inputText = new EditText(activity);
         LinearLayout container = new LinearLayout(activity);
 
-        int paddingPx = DP.dp2px(16);
+        int paddingPx = DP.INSTANCE.dp2px(16);
         container.setPadding(paddingPx, paddingPx, paddingPx, paddingPx);
         container.addView(inputText);
 
@@ -106,7 +106,7 @@ public class Dialogs {
         EditText editText = new EditText(activity);
         LinearLayout container = new LinearLayout(activity);
 
-        int paddingPx = DP.dp2px(16);
+        int paddingPx = DP.INSTANCE.dp2px(16);
         container.setPadding(paddingPx, paddingPx, paddingPx, paddingPx);
         container.addView(editText);
 
@@ -130,7 +130,7 @@ public class Dialogs {
         alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(view -> {
             String input = editText.getText().toString();
             if (TextUtils.isEmpty(input)) {
-                Toaster.s(nullHind);
+                Toaster.INSTANCE.s(nullHind);
                 return;
             }
             onTextInput.onInput(input);

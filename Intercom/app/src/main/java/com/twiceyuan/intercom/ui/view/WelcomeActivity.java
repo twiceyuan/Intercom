@@ -19,7 +19,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.twiceyuan.intercom.App;
 import com.twiceyuan.intercom.R;
 import com.twiceyuan.intercom.common.FirebaseUtil;
-import com.twiceyuan.intercom.common.Logger;
 import com.twiceyuan.intercom.common.RequestCode;
 import com.twiceyuan.intercom.common.Toaster;
 import com.twiceyuan.intercom.config.Nodes;
@@ -28,6 +27,7 @@ import com.twiceyuan.intercom.model.local.User;
 import com.twiceyuan.intercom.ui.base.BaseActivity;
 import com.twiceyuan.intercom.ui.view.account.EmailLoginActivity;
 import com.twiceyuan.intercom.ui.view.social.ConversationsActivity;
+import com.twiceyuan.log.L;
 
 import javax.inject.Inject;
 
@@ -41,7 +41,7 @@ import javax.inject.Inject;
  */
 public class WelcomeActivity extends BaseActivity implements GoogleApiClient.OnConnectionFailedListener {
 
-    private static final int RC_SIGN_IN = RequestCode.get();
+    private static final int RC_SIGN_IN = RequestCode.INSTANCE.get();
     @Inject
     FirebaseAuth mAuth;
     @Inject
@@ -58,8 +58,8 @@ public class WelcomeActivity extends BaseActivity implements GoogleApiClient.OnC
         mAuthListener = firebaseAuth -> {
             FirebaseUser user = firebaseAuth.getCurrentUser();
             if (user != null) {
-                DatabaseReference remoteUser = mDatabaseReference.child(Nodes.PROFILE).child(user.getUid());
-                FirebaseUtil.readSnapshot(remoteUser, User.class).subscribe(userSnapshot -> {
+                DatabaseReference remoteUser = mDatabaseReference.child(Nodes.INSTANCE.getPROFILE()).child(user.getUid());
+                FirebaseUtil.INSTANCE.readSnapshot(remoteUser, User.class).subscribe(userSnapshot -> {
                     if (userSnapshot == null) {
                         remoteUser.setValue(new User.Builder().from(user).build());
                     }
@@ -70,7 +70,7 @@ public class WelcomeActivity extends BaseActivity implements GoogleApiClient.OnC
                  */
                 App.get().createUserComponent(user);
 
-                Toaster.s(String.format(getString(R.string.user_logon), user.getEmail()));
+                Toaster.INSTANCE.s(String.format(getString(R.string.user_logon), user.getEmail()));
 
                 ConversationsActivity.start(this);
 
@@ -110,7 +110,7 @@ public class WelcomeActivity extends BaseActivity implements GoogleApiClient.OnC
                 GoogleSignInAccount account = result.getSignInAccount();
                 firebaseAuthWithGoogle(account);
             } else {
-                Toaster.s(getString(R.string.login_failed));
+                Toaster.INSTANCE.s(getString(R.string.login_failed));
             }
         }
 
@@ -123,23 +123,23 @@ public class WelcomeActivity extends BaseActivity implements GoogleApiClient.OnC
     }
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount account) {
-        Logger.d("firebaseAuthWithGoogle:" + account.getId());
+        L.i("firebaseAuthWithGoogle:" + account.getId());
 
         AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, task -> {
-                    Logger.d("signInWithCredential:onComplete:" + task.isSuccessful());
+                    L.i("signInWithCredential:onComplete:" + task.isSuccessful());
 
                     if (!task.isSuccessful()) {
-                        Logger.e("signInWithCredential", task.getException());
-                        Toaster.s(getString(R.string.auth_failed));
+                        L.e("signInWithCredential", task.getException());
+                        Toaster.INSTANCE.s(getString(R.string.auth_failed));
                     }
                 });
     }
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-        Toaster.s(String.format(getString(R.string.login_failed_arg), connectionResult.getErrorMessage()));
+        Toaster.INSTANCE.s(String.format(getString(R.string.login_failed_arg), connectionResult.getErrorMessage()));
     }
 
     public void loginByEmail(View view) {

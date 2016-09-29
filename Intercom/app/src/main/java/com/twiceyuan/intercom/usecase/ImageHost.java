@@ -75,7 +75,7 @@ public class ImageHost {
             return Observable.error(new RuntimeException("上传失败"));
         }
 
-        Observable<Result<UploadedImage>> uploadImage = mService.uploadImage(RequestUtil.filePart("smfile", tempFile));
+        Observable<Result<UploadedImage>> uploadImage = mService.uploadImage(RequestUtil.INSTANCE.filePart("smfile", tempFile));
         uploadImage.doOnUnsubscribe(() -> {
             if (tempFile.exists()) {
                 L.i("delete cache image: %s", tempFile.delete() ? "success" : "failed");

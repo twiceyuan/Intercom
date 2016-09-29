@@ -47,7 +47,7 @@ public class ProfileActivity extends PresenterUserActivity<ProfileContract.Prese
         CanBack, ProfileContract.View {
 
     private static final int MENU_ITEM_SUBMIT   = 1001;
-    private static final int REQUEST_PICK_IMAGE = RequestCode.get();
+    private static final int REQUEST_PICK_IMAGE = RequestCode.INSTANCE.get();
 
     @BindView(R.id.et_username)         MaterialEditText etUsername;
     @BindView(R.id.et_email)            MaterialEditText etEmail;
@@ -83,7 +83,7 @@ public class ProfileActivity extends PresenterUserActivity<ProfileContract.Prese
         etEmail.setText(user.email);
         etUserId.setText(user.globalId);
 
-        if (FirebaseUtil.isEmptyUrl(user.photoUrl)) {
+        if (FirebaseUtil.INSTANCE.isEmptyUrl(user.photoUrl)) {
             mProgressBar.setVisibility(View.INVISIBLE);
         } else {
             mAvatarProgress.setVisibility(View.VISIBLE);
@@ -135,7 +135,7 @@ public class ProfileActivity extends PresenterUserActivity<ProfileContract.Prese
 
     @Override
     public void onSubmitProfileSuccess() {
-        Toaster.s(getString(R.string.submit_success));
+        Toaster.INSTANCE.s(getString(R.string.submit_success));
         finish();
     }
 
@@ -150,7 +150,7 @@ public class ProfileActivity extends PresenterUserActivity<ProfileContract.Prese
                         .setFixAspectRatio(true)
                         .start(this);
             } else {
-                Toaster.s("选择图片失败");
+                Toaster.INSTANCE.s("选择图片失败");
             }
             return;
         }
@@ -162,7 +162,7 @@ public class ProfileActivity extends PresenterUserActivity<ProfileContract.Prese
                         image -> uploadedImage(image.url),
                         error -> mAvatarProgress.setVisibility(View.GONE));
             } else {
-                Toaster.s("裁剪图片失败");
+                Toaster.INSTANCE.s("裁剪图片失败");
             }
             return;
         }

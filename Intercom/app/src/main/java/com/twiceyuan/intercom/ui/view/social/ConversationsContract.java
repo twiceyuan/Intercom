@@ -47,7 +47,7 @@ public class ConversationsContract {
                 return;
             }
             DatabaseReference ref = mUserReference.getGlobalIdRef().child(inputText);
-            Observable<String> query = FirebaseUtil.readSnapshot(ref, String.class);
+            Observable<String> query = FirebaseUtil.INSTANCE.readSnapshot(ref, String.class);
             runRx(query, userRealId -> mUserReference.getUser(userRealId).flatMap(user -> {
                 if (user == null) {
                     getImplView().onShowErrorMessage("用户似乎不存在？");

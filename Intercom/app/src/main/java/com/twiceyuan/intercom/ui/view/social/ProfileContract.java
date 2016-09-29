@@ -9,11 +9,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 import com.twiceyuan.intercom.common.CommonUtil;
 import com.twiceyuan.intercom.common.FirebaseUtil;
-import com.twiceyuan.intercom.common.Logger;
 import com.twiceyuan.intercom.model.local.User;
 import com.twiceyuan.intercom.model.remote.UserReference;
 import com.twiceyuan.intercom.ui.base.BasePresenter;
 import com.twiceyuan.intercom.ui.base.BaseView;
+import com.twiceyuan.log.L;
 
 import javax.inject.Inject;
 
@@ -48,7 +48,7 @@ public class ProfileContract {
         }
 
         void fetchProfile() {
-            runRx(FirebaseUtil.readSnapshot(mUserReference.getUserRef(mFirebaseUser.getUid()), User.class), (user) -> {
+            runRx(FirebaseUtil.INSTANCE.readSnapshot(mUserReference.getUserRef(mFirebaseUser.getUid()), User.class), (user) -> {
                 mUser = user;
                 getImplView().onProfileUpdate(user);
             });
@@ -95,14 +95,14 @@ public class ProfileContract {
                             }
                             // 设置新的全局 ID
                             globalIdRef.setValue(mFirebaseUser.getUid());
-                            Logger.i("添加 ID 成功");
+                            L.i("添加 ID 成功");
                             subscriber.onNext(null);
                             subscriber.onCompleted();
                             return;
                         }
 
                         // 如果这个 Global ID 所处的位置原来存储的就是该用户的 UID，说明无需修改
-                        if (CommonUtil.equals(originUserId, mFirebaseUser.getUid())) {
+                        if (CommonUtil.INSTANCE.equals(originUserId, mFirebaseUser.getUid())) {
                             subscriber.onNext(null);
                             subscriber.onCompleted();
                         } else {

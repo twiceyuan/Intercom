@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'me.tatarka.retrolambda'
@@ -14,7 +15,7 @@ def releaseTime() {
 
 android {
     compileSdkVersion 24
-    buildToolsVersion "24.0.1"
+    buildToolsVersion "24.0.2"
 
     // apk输出重命名
     applicationVariants.all { variant ->
@@ -95,10 +96,14 @@ android {
             minSdkVersion 14
         }
     }
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
 }
 
 repositories {
     maven { url "https://jitpack.io" }
+    mavenCentral()
 }
 
 dependencies {
@@ -151,5 +156,6 @@ dependencies {
     // 图片选择
     compile 'com.github.jkwiecien:EasyImage:1.2.4'
     compile 'com.theartofdev.edmodo:android-image-cropper:2.3.1'
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }
 

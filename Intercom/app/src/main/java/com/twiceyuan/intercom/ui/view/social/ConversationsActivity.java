@@ -112,7 +112,7 @@ public class ConversationsActivity extends PresenterUserActivity<ConversationsCo
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 mProgressBar.setVisibility(ProgressBar.INVISIBLE);
-                Toaster.s(databaseError.getMessage());
+                Toaster.INSTANCE.s(databaseError.getMessage());
             }
         });
     }
@@ -129,7 +129,7 @@ public class ConversationsActivity extends PresenterUserActivity<ConversationsCo
                 mListenedConversation.add(conversation.id);
                 mUserReference.addMessageListenerToConversation(conversation, peerId);
             }
-            if (FirebaseUtil.isEmptyUrl(user.photoUrl)) {
+            if (FirebaseUtil.INSTANCE.isEmptyUrl(user.photoUrl)) {
                 holder.peerImageView.setImageResource(R.color.intercom_text_light);
             } else {
                 Glide.with(ConversationsActivity.this).load(user.photoUrl).into(holder.peerImageView);
@@ -161,7 +161,7 @@ public class ConversationsActivity extends PresenterUserActivity<ConversationsCo
                 mUserCache.put(peerId, user);
                 mAdapter.notifyDataSetChanged();
             });
-            return FirebaseUtil.readSnapshot(mUserReference.getUserRef(peerId), User.class);
+            return FirebaseUtil.INSTANCE.readSnapshot(mUserReference.getUserRef(peerId), User.class);
         }
     }
 
@@ -206,6 +206,6 @@ public class ConversationsActivity extends PresenterUserActivity<ConversationsCo
 
     @Override
     public void onShowErrorMessage(String message) {
-        Toaster.s(message);
+        Toaster.INSTANCE.s(message);
     }
 }

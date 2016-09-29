@@ -117,7 +117,7 @@ public class ChatActivity extends BaseUserActivity implements CanBack {
             return;
         } else {
             mSelfUid = firebaseUser.getUid();
-            mConversationRef = mFirebaseDatabaseReference.child(Nodes.MESSAGE).child(mConversationId);
+            mConversationRef = mFirebaseDatabaseReference.child(Nodes.INSTANCE.getMESSAGE()).child(mConversationId);
         }
 
         initViews();
@@ -167,8 +167,8 @@ public class ChatActivity extends BaseUserActivity implements CanBack {
 
         mMessageEditText = (EditText) findViewById(R.id.messageEditText);
         mMessageEditText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(mSharedPreferences
-                .getInt(Constants.FRIENDLY_MSG_LENGTH, Constants.DEFAULT_MSG_LENGTH_LIMIT))});
-        ViewUtil.observeText(mMessageEditText).subscribe(s -> mSendButton.setEnabled(s.trim().length() > 0 && mIsLoaded));
+                .getInt(Constants.INSTANCE.getFRIENDLY_MSG_LENGTH(), Constants.INSTANCE.getDEFAULT_MSG_LENGTH_LIMIT()))});
+        ViewUtil.INSTANCE.observeText(mMessageEditText).subscribe(s -> mSendButton.setEnabled(s.trim().length() > 0 && mIsLoaded));
 
         mConversationRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -218,7 +218,7 @@ public class ChatActivity extends BaseUserActivity implements CanBack {
         TextView messengerTextView;
 
         // 判断使用自己发言的布局还是对方发言的布局
-        boolean isSelf = CommonUtil.equals(message.from, mSelfUid);
+        boolean isSelf = CommonUtil.INSTANCE.equals(message.from, mSelfUid);
 
         if (isSelf) {
             avatarImage = viewHolder.messengerImageViewSelf;
@@ -237,8 +237,8 @@ public class ChatActivity extends BaseUserActivity implements CanBack {
 
         if (mUserCache.containsKey(message.from)) {
             User user = mUserCache.get(message.from);
-            messengerTextView.setText(TimeUtil.translateDate(message.createAt));
-            if (FirebaseUtil.isEmptyUrl(user.photoUrl)) {
+            messengerTextView.setText(TimeUtil.INSTANCE.translateDate(message.createAt));
+            if (FirebaseUtil.INSTANCE.isEmptyUrl(user.photoUrl)) {
                 avatarImage.setImageResource(R.color.intercom_text_light);
             } else {
                 Glide.with(ChatActivity.this).load(user.photoUrl).into(avatarImage);
@@ -247,7 +247,7 @@ public class ChatActivity extends BaseUserActivity implements CanBack {
 
         if (isShowTime(position)) {
             viewHolder.messageCreateAt.setVisibility(View.VISIBLE);
-            viewHolder.messageCreateAt.setText(TimeUtil.translateDate(message.createAt));
+            viewHolder.messageCreateAt.setText(TimeUtil.INSTANCE.translateDate(message.createAt));
         } else {
             viewHolder.messageCreateAt.setVisibility(View.GONE);
         }

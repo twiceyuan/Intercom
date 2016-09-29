@@ -40,13 +40,13 @@ public class UserReference {
      * 获得个人的对话列表
      */
     public DatabaseReference getUserConversations(String userId) {
-        return mReference.child(Nodes.CONVERSATIONS).child(userId);
+        return mReference.child(Nodes.INSTANCE.getCONVERSATIONS()).child(userId);
     }
 
     public DatabaseReference getUserConversations() {
         if (mUserConversationsRef == null) {
             mUserConversationsRef = mReference
-                    .child(Nodes.CONVERSATIONS)
+                    .child(Nodes.INSTANCE.getCONVERSATIONS())
                     .child(mUser.getUid());
         }
         return mUserConversationsRef;
@@ -63,11 +63,11 @@ public class UserReference {
      */
     public Observable<UserConversation> getConversation(String selfId, String peerUid) {
         DatabaseReference conversationRef = getUserConversations(selfId).child(peerUid);
-        return FirebaseUtil.readSnapshot(conversationRef, UserConversation.class).flatMap(conversation -> {
+        return FirebaseUtil.INSTANCE.readSnapshot(conversationRef, UserConversation.class).flatMap(conversation -> {
             if (conversation == null) {
                 UserConversation conversationNew = createConversation();
                 insertToPeer(peerUid, conversationNew);
-                return FirebaseUtil.setValue(conversationRef, conversationNew);
+                return FirebaseUtil.INSTANCE.setValue(conversationRef, conversationNew);
             } else {
                 return Observable.just(conversation);
             }
@@ -79,7 +79,7 @@ public class UserReference {
      */
     public DatabaseReference getMessageConversations() {
         if (mMessageConversationsRef == null) {
-            mMessageConversationsRef = mReference.child(Nodes.MESSAGE);
+            mMessageConversationsRef = mReference.child(Nodes.INSTANCE.getMESSAGE());
         }
         return mMessageConversationsRef;
     }
@@ -144,18 +144,18 @@ public class UserReference {
      * @param peerUid 对方的用户 ID
      */
     private void insertToPeer(String peerUid, UserConversation conversation) {
-        mReference.child(Nodes.CONVERSATIONS).child(peerUid).child(mUser.getUid()).setValue(conversation);
+        mReference.child(Nodes.INSTANCE.getCONVERSATIONS()).child(peerUid).child(mUser.getUid()).setValue(conversation);
     }
 
     public DatabaseReference getUserRef(String peerId) {
-        return mReference.child(Nodes.PROFILE).child(peerId);
+        return mReference.child(Nodes.INSTANCE.getPROFILE()).child(peerId);
     }
 
     public Observable<User> getUser(String peerId) {
-        return FirebaseUtil.observeValue(getUserRef(peerId), User.class);
+        return FirebaseUtil.INSTANCE.observeValue(getUserRef(peerId), User.class);
     }
 
     public DatabaseReference getGlobalIdRef() {
-        return mReference.child(Nodes.USER_GLOBAL_ID);
+        return mReference.child(Nodes.INSTANCE.getUSER_GLOBAL_ID());
     }
 }

@@ -31,8 +31,8 @@ public class User {
         public Builder from(FirebaseUser user) {
             mUser.email = user.getEmail();
             mUser.username = user.getDisplayName();
-            Check.ifNull(mUser.username, () -> mUser.username = mUser.email.split("@")[0]);
-            Check.notNull(user.getPhotoUrl(), url -> mUser.photoUrl = url.toString());
+            Check.INSTANCE.ifNull(mUser.username, () -> mUser.username = mUser.email.split("@")[0]);
+            Check.INSTANCE.notNull(user.getPhotoUrl(), url -> mUser.photoUrl = url.toString());
             return this;
         }
 

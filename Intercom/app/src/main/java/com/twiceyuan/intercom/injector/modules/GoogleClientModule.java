@@ -43,6 +43,6 @@ public class GoogleClientModule {
     }
 
     private void connectResult(ConnectionResult result) {
-        Toaster.s(mActivity.getString(R.string.google_connect_failed));
+        Toaster.INSTANCE.s(mActivity.getString(R.string.google_connect_failed));
     }
 }

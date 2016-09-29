@@ -130,7 +130,7 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     public void onThrow(Throwable throwable) {
-        Toaster.s(throwable.getMessage());
+        Toaster.INSTANCE.s(throwable.getMessage());
     }
 
     public <T> void runRx(Observable<T> observable, Action1<T> subscriber, Action1<Throwable> errorHandler, Action0 completeHandler) {
